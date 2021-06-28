@@ -93,7 +93,6 @@ export default {
       });
     },
     async startFlashing() {
-      this.flashInProcess = true;
       this.round++;
       for (let i = 0; i < this.round; i++) {
         this.sequence.push(this.getRandomPanel());
