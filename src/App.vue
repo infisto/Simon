@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <div class="wrapper" ref="wrapper" v-on="!flashInProcess ? {click: panelClicked} : null">
+    <div
+      class="wrapper"
+      ref="wrapper"
+      v-on="!flashInProcess ? { click: panelClicked } : null"
+    >
       <div class="top-left-panel" ref="topLeft">
         <audio src="../src/assets/sounds/sounds_1.mp3" ref="sound1"></audio>
       </div>
@@ -14,7 +18,7 @@
         <audio src="../src/assets/sounds/sounds_4.mp3" ref="sound4"></audio>
       </div>
     </div>
-    <h1 v-if="!lose">Score: {{ score }} Round: {{round}}</h1>
+    <h1 v-if="!lose">Score: {{ score }} Round: {{ round }}</h1>
     <h1 v-else style="color: red; font-size: 30px">
       You lose, your score: {{ score }}
     </h1>
@@ -68,7 +72,7 @@ export default {
       sequence: [],
       lose: false,
       round: 0,
-      flashInProcess: false
+      flashInProcess: false,
     };
   },
   methods: {
@@ -89,7 +93,7 @@ export default {
       });
     },
     async startFlashing() {
-      this.flashInProcess = true
+      this.flashInProcess = true;
       this.round++;
       for (let i = 0; i < this.round; i++) {
         this.sequence.push(this.getRandomPanel());
@@ -98,7 +102,7 @@ export default {
         panel.children[0].play();
         await this.flash(panel);
       }
-      this.flashInProcess = false
+      this.flashInProcess = false;
     },
     panelClicked(event) {
       if (this.round === 0) return false;
@@ -107,19 +111,19 @@ export default {
         event.target.children[0].play();
         this.score++;
         if (this.sequence.length === 0) {
-          this.flashInProcess = true
-          new Promise(resolve => {
+          this.flashInProcess = true;
+          new Promise((resolve) => {
             setTimeout(() => {
-              resolve()
-            }, 1000)
+              resolve();
+            }, 1000);
           }).then(() => {
             this.startFlashing();
-          })
+          });
         }
       } else {
         this.lose = true;
         this.round = 0;
-        this.sequence = []
+        this.sequence = [];
       }
     },
     refresh() {
